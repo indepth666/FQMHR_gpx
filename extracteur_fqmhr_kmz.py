@@ -1,5 +1,6 @@
 import requests
 import re
+import os
 
 MAP_PAGE_URL = "https://www.fqmhr.qc.ca/content/map/map.html?v2023"
 OUTPUT_FILE = "kmz_urls.txt"
@@ -11,12 +12,15 @@ HEADERS = {
 }
 
 def extract_kmz_from_map_page():
-    print(f"🌐 Téléchargement de la page : {MAP_PAGE_URL}")
+    print(f"Téléchargement de la page : {MAP_PAGE_URL}")
     try:
-        response = requests.get(MAP_PAGE_URL, headers=HEADERS)
+        response = requests.get(MAP_PAGE_URL, headers=HEADERS, timeout=30)
         response.raise_for_status()
+    except requests.RequestException as e:
+        print(f"❌ Erreur de connexion : {e}")
+        return []
     except Exception as e:
-        print(f"❌ Erreur : {e}")
+        print(f"❌ Erreur inattendue : {e}")
         return []
 
     content = response.text
@@ -25,9 +29,13 @@ def extract_kmz_from_map_page():
     matches = re.findall(r'https:\/\/www\.fqmhr\.qc\.ca\/content\/map\/kmz2025\/[^"]+?\.kmz', content)
     unique_links = sorted(set(matches))
 
-    with open(OUTPUT_FILE, "w") as f:
-        for link in unique_links:
-            f.write(link + "\n")
+    try:
+        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+            for link in unique_links:
+                f.write(link + "\n")
+    except IOError as e:
+        print(f"❌ Erreur d'écriture : {e}")
+        return []
 
     print(f"✅ {len(unique_links)} lien(s) KMZ trouvés et sauvegardés dans {OUTPUT_FILE}")
     return unique_links
