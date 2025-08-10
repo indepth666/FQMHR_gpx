@@ -1,0 +1,38 @@
+# Claude Code configuration
+CLAUDE.md
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Downloaded files and output
+downloads/
+converted/
+fqmhr_gpx/
+
+# URL list
+kmz_urls.txt
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
