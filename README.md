@@ -4,7 +4,7 @@ Outil d'extraction et de conversion automatique des cartes KMZ de la Fédératio
 
 ## Description
 
-Ce projet permet de télécharger automatiquement les cartes de sentiers de motoneige depuis le site officiel de la FQMHR et de les convertir au format GPX pour utilisation dans vos applications GPS favorites.
+Ce projet permet de télécharger automatiquement les cartes de sentiers de la FQMHR depuis le site officiel de la FQMHR et de les convertir au format GPX pour utilisation dans vos applications GPS favorites.
 
 ## Fonctionnalités
 
